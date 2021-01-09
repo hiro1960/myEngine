@@ -5,6 +5,7 @@ package main
 import (
 	"fmt"
 	"model"
+	"core"
 )
 
 // modelのクラスはmodelパッケージ内に全て定義してある
@@ -34,4 +35,15 @@ func main() {
 		fmt.Printf(" Name = %s\n", s.GetName())
 	}
 
+	// coreパッケージのテスト
+	var p1, p2 *core.Point
+	p1 = core.NewPoint([3]float64{1.0, 2.0, 3.0})
+	p2 = core.NewPoint([3]float64{1.0, 1.0, 1.0})
+
+	p1.Add(p2)
+
+	fmt.Printf("--- p1 result ---\n")
+	for i, v := range p1.Value {
+		fmt.Printf(" i = %d, v = %f\n", i, v)
+	}
 }
