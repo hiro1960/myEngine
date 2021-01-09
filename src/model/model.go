@@ -3,7 +3,7 @@
 package model
 
 import (
-	"core"
+	. "core"
 )
 
 // 本インターフェースを利用する全てのstructの持つメソッドをリストアップすること
@@ -11,8 +11,8 @@ import (
 type SimObject interface {
 	GetId() int32
 	GetName() string
-	SetPos(pos core.Point)
-	GetPos() core.Point
+	SetPos(pos Point)
+	GetPos() Point
 	GetWeight() float64 // どのstructが使うメソッドかコメントした方がいいか
 	GetMass() float64
 }
@@ -22,7 +22,7 @@ type SimObject interface {
 type baseObject struct {
 	ID   int32
 	Name string
-	Pos  core.Point
+	Pos  Point
 }
 
 // IDを返す
@@ -37,13 +37,13 @@ func (b baseObject) GetName() string {
 
 // 位置をセット
 // （引数はポインタでもいいが、とりあえず値渡しにしておく）
-func (b *baseObject) SetPos(p core.Point) {
+func (b *baseObject) SetPos(p Point) {
 	for i, _ := range b.Pos.Value {
 		b.Pos.Value[i] = p.Value[i]
 	}
 }
 
 // 位置を返す(返す結果は外部に影響されたくないので、値渡しにしたい)
-func (b *baseObject) GetPos() core.Point {
+func (b *baseObject) GetPos() Point {
 	return b.Pos
 }

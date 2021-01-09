@@ -3,7 +3,7 @@
 package model
 
 import (
-	"core"
+	. "core"
 )
 
 // class名自体は隠ぺいするため、小文字とする
@@ -24,6 +24,6 @@ func (v vehicle) GetMass() float64 {
 
 // 隠ぺいしたクラスを生成するためのメソッド
 func NewVehicle(id int32, name string, weight float64) *vehicle {
-	var pos core.Point
+	var pos Point
 	return &vehicle{&baseObject{id, name, pos}, weight}
 }
