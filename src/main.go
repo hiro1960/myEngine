@@ -3,9 +3,9 @@ package main
 
 // GOPATH環境変数の設定は必要（パッケージを読めなくなる）
 import (
+	"core"
 	"fmt"
 	"model"
-	"core"
 )
 
 // modelのクラスはmodelパッケージ内に全て定義してある
@@ -30,7 +30,7 @@ func main() {
 
 	fmt.Printf(" objList length = %d\n", len(objList))
 
-	for _,s := range objList {
+	for _, s := range objList {
 		fmt.Printf(" ID = %d\n", s.GetId())
 		fmt.Printf(" Name = %s\n", s.GetName())
 	}
@@ -46,4 +46,17 @@ func main() {
 	for i, v := range p1.Value {
 		fmt.Printf(" i = %d, v = %f\n", i, v)
 	}
+
+	// Tankに位置p1をセットし、値を確認する
+	obj = objList[0]
+
+	obj.SetPos(*p1)
+	var p3 core.Point
+	p3 = obj.GetPos()
+
+	fmt.Printf("--- Tank 位置 ---\n")
+	for i, v := range p3.Value {
+		fmt.Printf(" i = %d, v = %f\n", i, v)
+	}
+
 }

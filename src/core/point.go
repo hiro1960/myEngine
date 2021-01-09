@@ -16,6 +16,13 @@ func NewPoint(v [3]float64) *Point {
 	return p
 }
 
+// Pointの値セット
+func (p *Point)Set( pos *Point) {
+	for i,_ := range p.Value {
+		p.Value[i] = pos.Value[i]
+	}
+}
+
 // Pointの加算（自分自身に加算する）
 // (p自体もポインタにしておかないと変更結果を外に繁栄できない)
 func (p *Point) Add(v *Point) {

@@ -2,6 +2,10 @@
 // (ディレクトリ名とパッケージ名は同じ必要があるが、ファイル名は関係ない)
 package model
 
+import (
+	"core"
+)
+
 // class名自体は隠ぺいするため、小文字とする
 // baseObjectは同じmodelパッケージ内で定義してあるので、そのまま使える
 type ship struct {
@@ -20,5 +24,6 @@ func (v ship) GetMass() float64 {
 
 // 隠ぺいしたクラスを生成するためのメソッド
 func NewShip(id int32, name string, mass float64) *ship {
-	return &ship{&baseObject{id, name}, mass}
+	var pos core.Point
+	return &ship{&baseObject{id, name, pos}, mass}
 }
