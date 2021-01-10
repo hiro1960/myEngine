@@ -33,12 +33,13 @@ func testCore() {
 	}
 }
 
-// Tankに位置p1をセットし、値を確認する
+// Tankを使ってオブジェクトの扱いを確認する
 func testTank() {
 	var obj model.SimObject
 
 	obj = ObjList[0]
 
+	// Tankに位置p1をセットし、値を確認する
 	var p1 *core.Point
 	p1 = core.NewPoint([3]float64{1.0, 2.0, 3.0})
 
@@ -47,6 +48,18 @@ func testTank() {
 	p3 = obj.GetPos()
 
 	fmt.Printf("--- Tank 位置 ---\n")
+	for i, v := range p3.Value {
+		fmt.Printf(" i = %d, v = %f\n", i, v)
+	}
+
+	// Tankに速度p2をセットし、値を確認する
+	var p2 *core.Point
+	p2 = core.NewPoint([3]float64{10.0, 20.0, 30.0})
+
+	obj.SetVel(*p2)
+	p3 = obj.GetVel()
+
+	fmt.Printf("--- Tank 速度 ---\n")
 	for i, v := range p3.Value {
 		fmt.Printf(" i = %d, v = %f\n", i, v)
 	}

@@ -13,6 +13,8 @@ type SimObject interface {
 	GetName() string
 	SetPos(pos Point)
 	GetPos() Point
+	SetVel(vel Point)
+	GetVel() Point
 	GetWeight() float64 // どのstructが使うメソッドかコメントした方がいいか
 	GetMass() float64
 }
@@ -22,7 +24,8 @@ type SimObject interface {
 type baseObject struct {
 	ID   int32
 	Name string
-	Pos  Point
+	Pos  Point // オブジェクトの位置
+	Vel  Point // オブジェクトの速度
 }
 
 // IDを返す
@@ -46,4 +49,17 @@ func (b *baseObject) SetPos(p Point) {
 // 位置を返す(返す結果は外部に影響されたくないので、値渡しにしたい)
 func (b *baseObject) GetPos() Point {
 	return b.Pos
+}
+
+// 速度をセット
+// （引数はポインタでもいいが、とりあえず値渡しにしておく）
+func (b *baseObject) SetVel(p Point) {
+	for i, _ := range b.Pos.Value {
+		b.Vel.Value[i] = p.Value[i]
+	}
+}
+
+// 位置を返す(返す結果は外部に影響されたくないので、値渡しにしたい)
+func (b *baseObject) GetVel() Point {
+	return b.Vel
 }

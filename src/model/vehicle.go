@@ -25,5 +25,6 @@ func (v vehicle) GetMass() float64 {
 // 隠ぺいしたクラスを生成するためのメソッド
 func NewVehicle(id int32, name string, weight float64) *vehicle {
 	var pos Point
-	return &vehicle{&baseObject{id, name, pos}, weight}
+	var vel Point
+	return &vehicle{&baseObject{id, name, pos, vel}, weight}
 }

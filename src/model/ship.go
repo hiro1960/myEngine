@@ -25,5 +25,6 @@ func (v ship) GetMass() float64 {
 // 隠ぺいしたクラスを生成するためのメソッド
 func NewShip(id int32, name string, mass float64) *ship {
 	var pos Point
-	return &ship{&baseObject{id, name, pos}, mass}
+	var vel Point
+	return &ship{&baseObject{id, name, pos, vel}, mass}
 }
