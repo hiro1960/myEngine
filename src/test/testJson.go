@@ -11,8 +11,18 @@ import (
 
 // jsonを読み込む構造体
 type Scenario struct {
-	ID  int32
-	Pos []float64
+	ID   int32
+	Name string
+	Pos  []float64
+	Vel  []float64
+}
+
+type Item struct {
+	OBJ []Scenario
+}
+
+type SceS struct {
+	V []Item
 }
 
 func testJson() {
@@ -31,10 +41,11 @@ func testJson() {
 	// 一気に全部読み取り
 	b, err := ioutil.ReadAll(f)
 
-	// 出力
+	// ファイル内容を出力
 	fmt.Println(string(b))
 
-	var sce Scenario
+	var sce []Scenario
+
 	// jsonを構造体にエンコード(既に使用しているerr変数は何故か代入できず、エラーになる)
 	er := json.Unmarshal(b, &sce)
 
@@ -44,5 +55,11 @@ func testJson() {
 
 	// エンコード結果を出力
 	fmt.Println(sce)
+	fmt.Println(len(sce))
+
+	for i, v := range sce {
+		fmt.Printf("%d, %d, %s, %f, %f\n", i, v.ID, v.Name, v.Pos, v.Vel)
+		// PosとVelは配列として、個々の値を取得可能
+	}
 
 }
