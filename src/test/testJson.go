@@ -11,10 +11,13 @@ import (
 
 // jsonを読み込む構造体
 type Scenario struct {
-	ID   int32
-	Name string
-	Pos  []float64
-	Vel  []float64
+	ID     int32
+	Name   string
+	Tyep   string
+	Pos    []float64
+	Vel    []float64
+	Weight float64
+	Mass   float64
 }
 
 type Item struct {
