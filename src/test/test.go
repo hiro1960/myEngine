@@ -17,6 +17,8 @@ func TestMain() {
 
 	testTank()
 
+	testJson()
+
 }
 
 // coreパッケージのテスト
