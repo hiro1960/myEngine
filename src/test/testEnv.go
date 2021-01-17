@@ -9,5 +9,5 @@ func testEnv() {
 	env := env.MyEnv.GetInstance()
 	env.SetUp()
 
-	fmt.Printf(" radius = %f¥n", env.Radius)
+	fmt.Printf(" radius = %f \n", env.Radius)
 }
