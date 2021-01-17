@@ -19,6 +19,7 @@ func TestMain() {
 
 	testJson()
 
+	testEnv()
 }
 
 // coreパッケージのテスト
