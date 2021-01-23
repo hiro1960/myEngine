@@ -16,13 +16,13 @@ var ObjList []model.SimObject
 
 // jsonを読み込む構造体
 type Scenario struct {
-	ID     int32
-	Name   string
-	Category   string
-	Pos    [3]float64
-	Vel    [3]float64
-	Weight float64
-	Mass   float64
+	ID       int32
+	Name     string
+	Category string
+	Pos      [3]float64
+	Vel      [3]float64
+	Weight   float64
+	Mass     float64
 }
 
 func Initialize() {
@@ -58,12 +58,12 @@ func Initialize() {
 	// fmt.Println(sce)
 	// fmt.Println(len(sce))
 
-	for i, v := range sce {
-		fmt.Printf("%d, %d, %s, %s, %f, %f\n", i, v.ID, v.Category, v.Name, v.Pos, v.Vel)
-		// PosとVelは配列として、個々の値を取得可能
-	}
+	// for i, v := range sce {
+	// 	fmt.Printf("%d, %d, %s, %s, %f, %f\n", i, v.ID, v.Category, v.Name, v.Pos, v.Vel)
+	// 	// PosとVelは配列として、個々の値を取得可能
+	// }
 
-	fmt.Printf("\n")
+	// fmt.Printf("\n")
 
 	// シナリオから読み込んだオブジェクトを、objListに登録する
 	for _, v := range sce {
@@ -94,7 +94,7 @@ func Initialize() {
 	for i, v := range ObjList {
 		var pos Point = v.GetPos()
 		var vel Point = v.GetVel()
-		fmt.Printf("%d, %d, , %s, %f, %f\n", i, v.GetId(), v.GetName(), pos, vel)
+		fmt.Printf("%d, %d, %s, %f, %f\n", i, v.GetId(), v.GetName(), pos, vel)
 	}
 
 }
