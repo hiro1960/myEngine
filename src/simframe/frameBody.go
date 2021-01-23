@@ -28,11 +28,9 @@ func RunSim() {
 
 		// 各オブジェクトの状態を確認
 		fmt.Printf("count = %d\n", countDoen)
-		for i, v := range ObjList {
-			var pos Point = v.GetPos()
-			var vel Point = v.GetVel()
-			fmt.Printf("%d, %d, %s, %f, %f\n", i, v.GetId(), v.GetName(), pos, vel)
-		}	
+		for _, v := range ObjList {
+			v.Update()
+		}
 
 		countDoen--
 	}

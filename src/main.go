@@ -4,16 +4,16 @@ package main
 // GOPATH環境変数の設定は必要（パッケージを読めなくなる）
 import (
 	_ "core"
+	"env"
 	"fmt"
 	_ "model"
-	_ "test" // 試験用パッケージj
-	"env"
 	"simframe"
+	_ "test" // 試験用パッケージj
 )
 
 // modelのクラスはmodelパッケージ内に全て定義してある
 
-// 実際のリスト (これはsimframeパッケージで定義した方がいいか？) 
+// 実際のリスト (これはsimframeパッケージで定義した方がいいか？)
 // sinframeに移動 @20210123
 // var objList []model.SimObject
 

@@ -4,6 +4,7 @@ package model
 
 import (
 	. "core"
+	"fmt"
 )
 
 // 本インターフェースを利用する全てのstructの持つメソッドをリストアップすること
@@ -17,6 +18,7 @@ type SimObject interface {
 	GetVel() Point
 	GetWeight() float64 // どのstructが使うメソッドかコメントした方がいいか
 	GetMass() float64
+	Update()	// オブジェクトの更新処理位
 }
 
 // 基底となるデータ構造
@@ -62,4 +64,14 @@ func (b *baseObject) SetVel(p Point) {
 // 位置を返す(返す結果は外部に影響されたくないので、値渡しにしたい)
 func (b *baseObject) GetVel() Point {
 	return b.Vel
+}
+
+// 基本のmodelの更新処理、現状を出力するだけ
+func (b *baseObject) Update() {
+	fmt.Printf("-- Update: id = %d\n", b.ID)
+
+	var pos Point = b.GetPos()
+	var vel Point = b.GetVel()
+	fmt.Printf(" %d, %s, %f, %f\n", b.GetId(), b.GetName(), pos, vel)
+
 }
