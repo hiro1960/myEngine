@@ -72,6 +72,11 @@ func (b *baseObject) Update() {
 
 	var pos Point = b.GetPos()
 	var vel Point = b.GetVel()
+
+	// 位置の更新
+	pos.Add(&vel)
+	b.SetPos(pos)
+
 	fmt.Printf(" %d, %s, %f, %f\n", b.GetId(), b.GetName(), pos, vel)
 
 }
