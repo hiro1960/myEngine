@@ -70,6 +70,7 @@ func Initialize() {
 		var obj model.SimObject
 		var pos *Point
 		var vel *Point
+		var objDB ObjData
 
 		switch v.Category {
 		case "vehicle":
@@ -79,6 +80,12 @@ func Initialize() {
 			vel = NewPoint(v.Vel)
 			obj.SetVel(*vel)
 			ObjList = append(ObjList, obj)
+			// objDataDBへの登録
+			objDB.ID = v.ID
+			objDB.Name = v.Name
+			objDB.Pos = *pos
+			objDB.vel = *vel
+			ObjDataDB = append(ObjDataDB, objDB)
 
 		case "ship":
 			obj = model.NewShip(v.ID, v.Name, v.Mass)
@@ -87,6 +94,12 @@ func Initialize() {
 			vel = NewPoint(v.Vel)
 			obj.SetVel(*vel)
 			ObjList = append(ObjList, obj)
+			// objDataDBへの登録
+			objDB.ID = v.ID
+			objDB.Name = v.Name
+			objDB.Pos = *pos
+			objDB.vel = *vel
+			ObjDataDB = append(ObjDataDB, objDB)
 
 		}
 	}

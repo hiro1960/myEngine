@@ -3,7 +3,7 @@ package main
 
 // GOPATH環境変数の設定は必要（パッケージを読めなくなる）
 import (
-	_ "core"
+	. "core"
 	"env"
 	"fmt"
 	_ "model"
@@ -30,7 +30,15 @@ func main() {
 	// シナリオ読み込み
 	simframe.Initialize()
 
+	// objDataDBのテスト
+	// var obj *simframe.ObjData
+	obj, _ := simframe.GetObjData( 102 )
+
+	var pos Point
+	pos = obj.GetPos(102)
+	fmt.Printf("102 : %f\n", pos)
+
 	// シミュレーション本体
-	simframe.RunSim()
+	// simframe.RunSim()
 
 }
