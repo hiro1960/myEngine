@@ -17,7 +17,7 @@ type ObjData struct {
 	ID         int32
 	Name       string
 	Pos        Point // 現在位置
-	vel        Point // 現在速度
+	Vel        Point // 現在速度 頭文字が大文字でないと、外部で参照できない
 	updatedPos Point // 更新後の位置
 	updatedVel Point // 更新後の速度
 }
@@ -39,17 +39,12 @@ func GetObjData(id int32) (ObjData, error) {
 }
 
 // objDataのitemから現在のPosを返す関数
-func (b *ObjData) GetPos( id int32) Point {
+// この関数不要か？ GetObjDataで直接オブジェクトのデータを参照できるから
+func (b *ObjData) GetPos( id int32) (Point, error) {
 	// errorを使う方法をまだ思いつかない
-	obj, _ := GetObjData( id )
-	return obj.Pos
+	obj, error := GetObjData( id )
+	return obj.Pos, error
 }
-
-// objDataのitemから現在のVelを返す関数
-
-// objdatqのitemに更新後のPosをセットする関数
-
-// objDataのitemに更新後のVelをセットする関数
 
 // objDataの更新後データをサイクルが進んだ時に現在データにする関数
 

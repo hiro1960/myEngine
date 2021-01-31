@@ -3,7 +3,7 @@ package main
 
 // GOPATH環境変数の設定は必要（パッケージを読めなくなる）
 import (
-	. "core"
+	_ "core"
 	"env"
 	"fmt"
 	_ "model"
@@ -34,8 +34,13 @@ func main() {
 	// var obj *simframe.ObjData
 	obj, _ := simframe.GetObjData( 102 )
 
-	var pos Point
-	pos = obj.GetPos(102)
+	fmt.Printf(" 102 vel= %f\n", obj.Vel)
+
+	// errの使い方の確認
+	pos, err := obj.GetPos(101)
+	if err != nil {
+		fmt.Printf(" GetPos: Error (%s)\n", err)
+	}
 	fmt.Printf("102 : %f\n", pos)
 
 	// シミュレーション本体

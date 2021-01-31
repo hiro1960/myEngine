@@ -84,7 +84,7 @@ func Initialize() {
 			objDB.ID = v.ID
 			objDB.Name = v.Name
 			objDB.Pos = *pos
-			objDB.vel = *vel
+			objDB.Vel = *vel
 			ObjDataDB = append(ObjDataDB, objDB)
 
 		case "ship":
@@ -98,7 +98,7 @@ func Initialize() {
 			objDB.ID = v.ID
 			objDB.Name = v.Name
 			objDB.Pos = *pos
-			objDB.vel = *vel
+			objDB.Vel = *vel
 			ObjDataDB = append(ObjDataDB, objDB)
 
 		}
