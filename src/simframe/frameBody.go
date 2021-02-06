@@ -29,7 +29,7 @@ var ObjDataDB []ObjData
 func GetObjData(id int32) (ObjData, error) {
 	for _, v := range ObjDataDB {
 		if v.ID == id {
-			return v, nil
+			return v, nil	// 正常に見つかった
 		}
 	}
 
