@@ -1,4 +1,1 @@
 goで簡単なsimulation-frameworkを作ってみる
-
-2段階認証を設定したのでテスト
-Personal access tokenが本当に機能しているか確認
