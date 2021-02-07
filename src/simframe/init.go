@@ -3,11 +3,11 @@ package simframe
 
 import (
 	. "core"
+	"model"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"log"
-	"model"
 	"os"
 )
 
@@ -70,14 +70,14 @@ func Initialize() {
 		var obj model.SimObject
 		var pos *Point
 		var vel *Point
-		var objDB ObjData
+		var objDB model.ObjData
 
 		switch v.Category {
 		case "vehicle":
 			obj = model.NewVehicle(v.ID, v.Name, v.Weight)
-			pos = NewPoint(v.Pos)
+			pos = NewPoint(v.Pos)	// ポインタを返してくるのに注意
 			obj.SetPos(*pos)
-			vel = NewPoint(v.Vel)
+			vel = NewPoint(v.Vel)	// ポインタを返してくるのに注意
 			obj.SetVel(*vel)
 			ObjList = append(ObjList, obj)
 			// objDataDBへの登録
@@ -85,7 +85,7 @@ func Initialize() {
 			objDB.Name = v.Name
 			objDB.Pos = *pos
 			objDB.Vel = *vel
-			ObjDataDB = append(ObjDataDB, objDB)
+			model.ObjDataDB = append(model.ObjDataDB, objDB)
 
 		case "ship":
 			obj = model.NewShip(v.ID, v.Name, v.Mass)
@@ -99,7 +99,7 @@ func Initialize() {
 			objDB.Name = v.Name
 			objDB.Pos = *pos
 			objDB.Vel = *vel
-			ObjDataDB = append(ObjDataDB, objDB)
+			model.ObjDataDB = append(model.ObjDataDB, objDB)
 
 		}
 	}

@@ -5,7 +5,52 @@ package model
 import (
 	. "core"
 	"fmt"
+	"errors"
 )
+
+// シミュレーションに登場する全てのオブジェクトの位置、速度等データを管理する
+// 現在時間のデータと、今回の時間で更新したデータを保持
+// サイクルが進む時に、更新したデータが現在時間のデータとなる
+
+// 各オブジェクトのデータの宣言
+type ObjData struct {
+	ID         int32
+	Name       string
+	Pos        Point // 現在位置
+	Vel        Point // 現在速度 頭文字が大文字でないと、外部で参照できない
+	updatedPos Point // 更新後の位置
+	updatedVel Point // 更新後の速度
+}
+
+// シミュレーションに登場する全てのオブジェクトの位置、速度等データを管理する
+// 現在時間のデータと、今回の時間で更新したデータを保持
+// サイクルが進む時に、更新したデータが現在時間のデータとなる
+
+// オブジェクトのデータベース本体
+var ObjDataDB []ObjData
+
+// IDでobjDataのitemを返す関数
+func GetObjData(id int32) (ObjData, error) {
+	for _, v := range ObjDataDB {
+		if v.ID == id {
+			return v, nil	// 正常に見つかった
+		}
+	}
+
+	// return nil  // そもそもここに来ることを想定していない
+	var b ObjData	// ダミーの戻り値
+	return b, errors.New("Failure")
+}
+
+// objDataの更新後データをサイクルが進んだ時に現在データにする関数
+func UpdateObjData() {
+	for _, v := range ObjDataDB {
+		v.Pos = v.updatedPos
+		v.Vel = v.updatedVel
+
+		fmt.Printf("in UpdateObjData(): id = %d, pos = %f\n", v.ID, v.Pos)
+	}
+}
 
 // 本インターフェースを利用する全てのstructの持つメソッドをリストアップすること
 // 公開するのは、このインターフェース名だけにする
@@ -70,13 +115,16 @@ func (b *baseObject) GetVel() Point {
 func (b *baseObject) Update() {
 	fmt.Printf("-- Update: id = %d\n", b.ID)
 
-	var pos Point = b.GetPos()
-	var vel Point = b.GetVel()
+	// 位置に単純に速度ベクトルを加算するだけ
+	b.Pos.Add(&b.Vel)
 
-	// 位置の更新
-	pos.Add(&vel)
-	b.SetPos(pos)
+	// ObjDataの更新（他のオブジェクトからの参照用に更新しておく）
+	objDB, err := GetObjData( b.ID )
+	if err != nil {
+		objDB.updatedPos = b.Pos
+		objDB.updatedVel = b.Vel
+	}
 
-	fmt.Printf(" %d, %s, %f, %f\n", b.GetId(), b.GetName(), pos, vel)
+	// fmt.Printf(" %d, %s, %f, %f\n", b.GetId(), b.GetName(), pos, vel)
 
 }

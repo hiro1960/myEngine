@@ -6,16 +6,12 @@ import (
 	_ "core"
 	"env"
 	"fmt"
-	_ "model"
+	"model"
 	"simframe"
 	_ "test" // 試験用パッケージj
 )
 
 // modelのクラスはmodelパッケージ内に全て定義してある
-
-// 実際のリスト (これはsimframeパッケージで定義した方がいいか？)
-// sinframeに移動 @20210123
-// var objList []model.SimObject
 
 func main() {
 
@@ -32,18 +28,18 @@ func main() {
 
 	// objDataDBのテスト
 	// var obj *simframe.ObjData
-	obj, _ := simframe.GetObjData( 102 )
+	obj, _ := model.GetObjData( 102 )
 
 	fmt.Printf(" 102 vel= %f\n", obj.Vel)
 
 	// errの使い方の確認
-	pos, err := obj.GetPos(101)
+	obj, err := model.GetObjData(101)
 	if err != nil {
-		fmt.Printf(" GetPos: Error (%s)\n", err)
+		fmt.Printf(" GetObjData: Error (%s)\n", err)
 	}
-	fmt.Printf("102 : %f\n", pos)
+	fmt.Printf("101 : %v\n", obj)
 
 	// シミュレーション本体
-	// simframe.RunSim()
+	simframe.RunSim()
 
 }
