@@ -33,7 +33,6 @@ func RunSim() {
 			objDB, _ := model.GetObjData(v.GetId())
 
 			fmt.Printf(" now value: %d, %s, %f, %f\n", objDB.ID, objDB.Name, objDB.Pos, objDB.Vel)
-			// fmt.Printf(" updated value: %d, %s, %f, %f\n", objDB.ID, objDB.Name, objDB.updatedPos, objDB.updatedVel)
 		}
 
 		// ObkDataDBの各オブジェクトのデータを更新したものにする

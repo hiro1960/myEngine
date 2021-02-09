@@ -46,11 +46,10 @@ func GetObjData(id int32) (*ObjData, error) {
 // objDataの更新後データをサイクルが進んだ時に現在データにする関数
 func UpdateObjData() {
 	for _, v := range ObjDataDB {
-		// v.Pos = v.updatedPos
+		fmt.Printf("in UpdateObjData(): id = %d, pos = %f, updated Pos = %f\n", v.ID, v.Pos, v.UpdatedPos)
+
 		v.setPos(*v.UpdatedPos)
 		v.setVel(*v.UpdatedVel)
-
-		fmt.Printf("in UpdateObjData(): id = %d, pos = %f, vel = %f\n", v.ID, v.Pos, v.Vel)
 	}
 }
 
