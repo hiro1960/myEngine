@@ -4,6 +4,7 @@ package model
 
 import (
 	. "core"
+	"fmt"
 )
 
 // class名自体は隠ぺいするため、小文字とする
@@ -27,4 +28,21 @@ func NewShip(id int32, name string, mass float64) *ship {
 	var pos Point
 	var vel Point
 	return &ship{&baseObject{id, name, pos, vel}, mass}
+}
+
+func (b *ship) Update() {
+	fmt.Printf("-- Ship Update: id = %d\n", b.ID)
+
+	// 位置に単純に速度ベクトルを加算するだけ
+	b.Pos.Add(&b.Vel)
+
+	// ObjDataの更新（他のオブジェクトからの参照用に更新しておく）
+	objDB, err := GetObjData( b.ID )
+	if err == nil {
+		*objDB.UpdatedPos = b.Pos
+		*objDB.UpdatedVel = b.Vel
+	}
+
+	fmt.Printf(" in Ship update(): %d, %s, %f, %f\n", b.GetId(), b.GetName(), b.Pos, b.Vel)
+
 }
