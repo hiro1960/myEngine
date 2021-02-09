@@ -30,8 +30,13 @@ func NewShip(id int32, name string, mass float64) *ship {
 	return &ship{&baseObject{id, name, pos, vel}, mass}
 }
 
+// ship独自の更新関数を定義する
 func (b *ship) Update() {
 	fmt.Printf("-- Ship Update: id = %d\n", b.ID)
+
+	obj, _ := GetObjData(102)	// 102のJeepを決め打ちで情報を得る
+
+	fmt.Printf("in ship Jeep data: %d %s %f %f\n", obj.ID, obj.Name, obj.Pos, obj.Vel)
 
 	// 位置に単純に速度ベクトルを加算するだけ
 	b.Pos.Add(&b.Vel)
