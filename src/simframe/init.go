@@ -83,8 +83,10 @@ func Initialize() {
 			// objDataDBへの登録
 			objDB.ID = v.ID
 			objDB.Name = v.Name
-			objDB.Pos = *pos
-			objDB.Vel = *vel
+			objDB.Pos = pos	// ポインタを代入していることに注意
+			objDB.Vel = vel
+			objDB.UpdatedPos = new(Point)
+			objDB.UpdatedVel = new(Point)
 			model.ObjDataDB = append(model.ObjDataDB, objDB)
 
 		case "ship":
@@ -97,8 +99,10 @@ func Initialize() {
 			// objDataDBへの登録
 			objDB.ID = v.ID
 			objDB.Name = v.Name
-			objDB.Pos = *pos
-			objDB.Vel = *vel
+			objDB.Pos = pos
+			objDB.Vel = vel
+			objDB.UpdatedPos = new(Point)
+			objDB.UpdatedVel = new(Point)
 			model.ObjDataDB = append(model.ObjDataDB, objDB)
 
 		}

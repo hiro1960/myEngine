@@ -16,10 +16,11 @@ import (
 type ObjData struct {
 	ID         int32
 	Name       string
-	Pos        Point // 現在位置
-	Vel        Point // 現在速度 頭文字が大文字でないと、外部で参照できない
-	updatedPos Point // 更新後の位置
-	updatedVel Point // 更新後の速度
+	// 構造体はポインタで定義しておかないと、参照時に自動的に新規生成が行われてしまうので注意が必要
+	Pos        *Point // 現在位置
+	Vel        *Point // 現在速度 頭文字が大文字でないと、外部で参照できない
+	UpdatedPos *Point // 更新後の位置
+	UpdatedVel *Point // 更新後の速度
 }
 
 // シミュレーションに登場する全てのオブジェクトの位置、速度等データを管理する
@@ -30,25 +31,38 @@ type ObjData struct {
 var ObjDataDB []ObjData
 
 // IDでobjDataのitemを返す関数
-func GetObjData(id int32) (ObjData, error) {
+func GetObjData(id int32) (*ObjData, error) {
 	for _, v := range ObjDataDB {
 		if v.ID == id {
-			return v, nil	// 正常に見つかった
+			return &v, nil	// 正常に見つかった
 		}
 	}
 
 	// return nil  // そもそもここに来ることを想定していない
 	var b ObjData	// ダミーの戻り値
-	return b, errors.New("Failure")
+	return &b, errors.New("Failure")
 }
 
 // objDataの更新後データをサイクルが進んだ時に現在データにする関数
 func UpdateObjData() {
 	for _, v := range ObjDataDB {
-		v.Pos = v.updatedPos
-		v.Vel = v.updatedVel
+		// v.Pos = v.updatedPos
+		v.setPos(*v.UpdatedPos)
+		v.setVel(*v.UpdatedVel)
 
-		fmt.Printf("in UpdateObjData(): id = %d, pos = %f\n", v.ID, v.Pos)
+		fmt.Printf("in UpdateObjData(): id = %d, pos = %f, vel = %f\n", v.ID, v.Pos, v.Vel)
+	}
+}
+
+func (v *ObjData) setPos( b Point) {
+	for i, _ := range b.Value {
+		v.Pos.Value[i] = b.Value[i]
+	}
+}
+
+func (v *ObjData) setVel( b Point) {
+	for i, _ := range b.Value {
+		v.Vel.Value[i] = b.Value[i]
 	}
 }
 
@@ -120,11 +134,12 @@ func (b *baseObject) Update() {
 
 	// ObjDataの更新（他のオブジェクトからの参照用に更新しておく）
 	objDB, err := GetObjData( b.ID )
-	if err != nil {
-		objDB.updatedPos = b.Pos
-		objDB.updatedVel = b.Vel
+	if err == nil {
+		*objDB.UpdatedPos = b.Pos
+		*objDB.UpdatedVel = b.Vel
+		// fmt.Printf("no error GetObjData()\n")
 	}
 
-	// fmt.Printf(" %d, %s, %f, %f\n", b.GetId(), b.GetName(), pos, vel)
+	fmt.Printf(" in update(): %d, %s, %f, %f\n", b.GetId(), b.GetName(), b.Pos, b.Vel)
 
 }
