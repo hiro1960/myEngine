@@ -11,6 +11,8 @@ func RunSim() {
 
 	fmt.Printf("-- RunSim --\n")
 
+	fmt.Printf(" Count = %d, DeltaTime = %f\n", TimeSet.Count, TimeSet.DeltaTime)
+
 	// こちらでもObjListがスコープに入っているかの確認
 	// 各オブジェクトの初期値
 	fmt.Printf("-- init Object ---\n")
@@ -20,7 +22,7 @@ func RunSim() {
 
 	// 計算の本体loop
 	// 実験なので、回数を絞る
-	var countDown int32 = 10
+	var countDown int32 = TimeSet.Count
 
 	for countDown > 0 {
 

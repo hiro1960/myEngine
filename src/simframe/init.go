@@ -3,11 +3,11 @@ package simframe
 
 import (
 	. "core"
-	"model"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"log"
+	"model"
 	"os"
 )
 
@@ -16,14 +16,24 @@ var ObjList []model.SimObject
 
 // jsonを読み込む構造体
 type Scenario struct {
-	ID       int32
-	Name     string
-	Category string
-	Pos      [3]float64
-	Vel      [3]float64
-	Weight   float64
-	Mass     float64
+	ID        int32
+	Name      string
+	Category  string
+	Pos       [3]float64
+	Vel       [3]float64
+	Weight    float64
+	Mass      float64
+	Count     int32
+	DeltaTime float64
 }
+
+type SimCtrl struct {
+	Count     int32
+	DeltaTime float64
+}
+
+// シミュレーションの時間管理
+var TimeSet SimCtrl
 
 func Initialize() {
 
@@ -55,15 +65,8 @@ func Initialize() {
 	}
 
 	// エンコード結果を出力
-	// fmt.Println(sce)
-	// fmt.Println(len(sce))
-
-	// for i, v := range sce {
-	// 	fmt.Printf("%d, %d, %s, %s, %f, %f\n", i, v.ID, v.Category, v.Name, v.Pos, v.Vel)
-	// 	// PosとVelは配列として、個々の値を取得可能
-	// }
-
-	// fmt.Printf("\n")
+	fmt.Println(sce)
+	fmt.Println(len(sce))
 
 	// シナリオから読み込んだオブジェクトを、objListに登録する
 	for _, v := range sce {
@@ -73,17 +76,21 @@ func Initialize() {
 		var objDB model.ObjData
 
 		switch v.Category {
+		case "SimCtrl":
+			TimeSet.Count = v.Count
+			TimeSet.DeltaTime = v.DeltaTime
+
 		case "vehicle":
 			obj = model.NewVehicle(v.ID, v.Name, v.Weight)
-			pos = NewPoint(v.Pos)	// ポインタを返してくるのに注意
+			pos = NewPoint(v.Pos) // ポインタを返してくるのに注意
 			obj.SetPos(*pos)
-			vel = NewPoint(v.Vel)	// ポインタを返してくるのに注意
+			vel = NewPoint(v.Vel) // ポインタを返してくるのに注意
 			obj.SetVel(*vel)
 			ObjList = append(ObjList, obj)
 			// objDataDBへの登録
 			objDB.ID = v.ID
 			objDB.Name = v.Name
-			objDB.Pos = pos	// ポインタを代入していることに注意
+			objDB.Pos = pos // ポインタを代入していることに注意
 			objDB.Vel = vel
 			objDB.UpdatedPos = new(Point)
 			objDB.UpdatedVel = new(Point)
