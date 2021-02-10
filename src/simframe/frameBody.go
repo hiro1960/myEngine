@@ -5,6 +5,7 @@ import (
 	_ "core"
 	"fmt"
 	"model"
+	"env"
 )
 
 func RunSim() {
@@ -42,5 +43,10 @@ func RunSim() {
 
 		countDown--
 	}
+
+	// singletonのテスト
+	env := env.MyEnv.GetInstance()
+	fmt.Printf(" at RunSim(), radius = %f \n", env.Radius)
+
 
 }
