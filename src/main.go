@@ -6,9 +6,9 @@ import (
 	_ "core"
 	"env"
 	"fmt"
+	"logwriter"
 	"model"
 	"simframe"
-	"logwriter"
 	_ "test" // 試験用パッケージj
 )
 
@@ -33,13 +33,14 @@ func main() {
 	}
 
 	log.WriteS("1st line\n")
+	log.Outf.WriteString(fmt.Sprintf("%d,%f\n", 101, 1.23))	// こちらの方がlogインスタンス内に複数のファイル操作ができるようになる（少し汚いが）
 
 	// シナリオ読み込み
 	simframe.Initialize()
 
 	// objDataDBのテスト
 	// var obj *simframe.ObjData
-	obj, _ := model.GetObjData( 102 )
+	obj, _ := model.GetObjData(102)
 
 	fmt.Printf(" 102 vel= %f\n", obj.Vel)
 

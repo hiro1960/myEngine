@@ -9,8 +9,8 @@ import (
 // 単にこのoutfという変数をグローバル変数として、外部から参照できるようにするだけでよかったか？
 // 複数のファイルを開きたい時、その数だけこのlog.goのコピーが必要になってしまう
 type singleton struct {
-	// Outf *os.File
-	outf *os.File
+	Outf *os.File
+	// outf *os.File
 }
 
 func (s *singleton) GetInstance() *singleton {
@@ -24,16 +24,16 @@ type Logw struct {
 
 func (s *singleton) Open( name string) ( error) {
 	outf, err := os.Create(name)
-	s.outf = outf
+	s.Outf = outf
 	return err
 }
 
 func (s *singleton) Close() {
-	s.outf.Close()
+	s.Outf.Close()
 }
 
 func (s *singleton) WriteS( data string) {
-	s.outf.WriteString(data)
+	s.Outf.WriteString(data)
 }
 
 var LogWriter = &Logw{}
