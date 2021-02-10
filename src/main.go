@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"model"
 	"simframe"
+	"logwriter"
 	_ "test" // 試験用パッケージj
 )
 
@@ -22,6 +23,16 @@ func main() {
 	env.SetUp()
 
 	fmt.Printf(" at main, radius = %f \n", env.Radius)
+
+	// log用ファイルの準備
+	log := logwriter.LogWriter.GetInstance()
+
+	erro := log.Open("./output.log")
+	if erro != nil {
+		panic(erro)
+	}
+
+	log.WriteS("1st line\n")
 
 	// シナリオ読み込み
 	simframe.Initialize()
@@ -41,5 +52,8 @@ func main() {
 
 	// シミュレーション本体
 	simframe.RunSim()
+
+	// log用ファイルのクローズ
+	log.Close()
 
 }

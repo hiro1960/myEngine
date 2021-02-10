@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"model"
 	"env"
+	"logwriter"
 )
 
 func RunSim() {
@@ -48,5 +49,7 @@ func RunSim() {
 	env := env.MyEnv.GetInstance()
 	fmt.Printf(" at RunSim(), radius = %f \n", env.Radius)
 
+	log := logwriter.LogWriter.GetInstance()
+	log.WriteS("2nd line\n")
 
 }

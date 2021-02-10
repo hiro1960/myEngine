@@ -3,21 +3,21 @@
 package env
 
 //
-type Singleton struct {
+type singleton struct {
 	Radius float64
 }
 
-func (s *Singleton) GetInstance() *Singleton {
+func (s *singleton) GetInstance() *singleton {
 	// s.radius = 6371000.0
 	return s
 }
 
 // Env型
 type Env struct {
-	Singleton
+	singleton
 }
 
-func (s *Singleton) SetUp() {
+func (s *singleton) SetUp() {
 	s.Radius = 6371000.0
 }
 
