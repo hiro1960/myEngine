@@ -4,8 +4,8 @@ package model
 
 import (
 	. "core"
-	"fmt"
 	"errors"
+	"fmt"
 	"logwriter"
 )
 
@@ -15,8 +15,8 @@ import (
 
 // 各オブジェクトのデータの宣言
 type ObjData struct {
-	ID         int32
-	Name       string
+	ID   int32
+	Name string
 	// 構造体はポインタで定義しておかないと、参照時に自動的に新規生成が行われてしまうので注意が必要
 	Pos        *Point // 現在位置
 	Vel        *Point // 現在速度 頭文字が大文字でないと、外部で参照できない
@@ -35,12 +35,12 @@ var ObjDataDB []ObjData
 func GetObjData(id int32) (*ObjData, error) {
 	for _, v := range ObjDataDB {
 		if v.ID == id {
-			return &v, nil	// 正常に見つかった
+			return &v, nil // 正常に見つかった
 		}
 	}
 
 	// return nil  // そもそもここに来ることを想定していない
-	var b ObjData	// ダミーの戻り値
+	var b ObjData // ダミーの戻り値
 	return &b, errors.New("Failure")
 }
 
@@ -56,13 +56,13 @@ func UpdateObjData() {
 	}
 }
 
-func (v *ObjData) setPos( b Point) {
+func (v *ObjData) setPos(b Point) {
 	for i, _ := range b.Value {
 		v.Pos.Value[i] = b.Value[i]
 	}
 }
 
-func (v *ObjData) setVel( b Point) {
+func (v *ObjData) setVel(b Point) {
 	for i, _ := range b.Value {
 		v.Vel.Value[i] = b.Value[i]
 	}
@@ -79,7 +79,7 @@ type SimObject interface {
 	GetVel() Point
 	GetWeight() float64 // どのstructが使うメソッドかコメントした方がいいか
 	GetMass() float64
-	Update()	// オブジェクトの更新処理位
+	Update() // オブジェクトの更新処理位
 }
 
 // 基底となるデータ構造
@@ -134,7 +134,7 @@ func (b *baseObject) Update() {
 	b.Pos.Add(&b.Vel)
 
 	// ObjDataの更新（他のオブジェクトからの参照用に更新しておく）
-	objDB, err := GetObjData( b.ID )
+	objDB, err := GetObjData(b.ID)
 	if err == nil {
 		*objDB.UpdatedPos = b.Pos
 		*objDB.UpdatedVel = b.Vel

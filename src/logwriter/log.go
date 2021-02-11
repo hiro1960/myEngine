@@ -22,7 +22,7 @@ type Logw struct {
 	singleton
 }
 
-func (s *singleton) Open( name string) ( error) {
+func (s *singleton) Open(name string) error {
 	outf, err := os.Create(name)
 	s.Outf = outf
 	return err
@@ -32,7 +32,7 @@ func (s *singleton) Close() {
 	s.Outf.Close()
 }
 
-func (s *singleton) WriteS( data string) {
+func (s *singleton) WriteS(data string) {
 	s.Outf.WriteString(data)
 }
 
