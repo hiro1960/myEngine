@@ -64,9 +64,9 @@ func Initialize() {
 		log.Fatal(er)
 	}
 
-	// エンコード結果を出力
-	fmt.Println(sce)
-	fmt.Println(len(sce))
+	// エンコード結果を出力 （テスト用）
+	// fmt.Println(sce)
+	// fmt.Println(len(sce))
 
 	// シナリオから読み込んだオブジェクトを、objListに登録する
 	for _, v := range sce {
@@ -113,12 +113,6 @@ func Initialize() {
 			model.ObjDataDB = append(model.ObjDataDB, objDB)
 
 		}
-	}
-
-	for i, v := range ObjList {
-		var pos Point = v.GetPos()
-		var vel Point = v.GetVel()
-		fmt.Printf("%d, %d, %s, %f, %f\n", i, v.GetId(), v.GetName(), pos, vel)
 	}
 
 }

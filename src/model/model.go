@@ -6,6 +6,7 @@ import (
 	. "core"
 	"fmt"
 	"errors"
+	"logwriter"
 )
 
 // シミュレーションに登場する全てのオブジェクトの位置、速度等データを管理する
@@ -45,8 +46,10 @@ func GetObjData(id int32) (*ObjData, error) {
 
 // objDataの更新後データをサイクルが進んだ時に現在データにする関数
 func UpdateObjData() {
+	log := logwriter.LogWriter.GetInstance()
+
 	for _, v := range ObjDataDB {
-		fmt.Printf("in UpdateObjData(): id = %d, pos = %f, updated Pos = %f\n", v.ID, v.Pos, v.UpdatedPos)
+		log.WriteS(fmt.Sprintf("id,%d,name,%s,pos,%f,vael,%f,updatedPos,%f,updatedVel,%f\n", v.ID, v.Name, v.Pos, v.Vel, v.UpdatedPos, v.UpdatedVel))
 
 		v.setPos(*v.UpdatedPos)
 		v.setVel(*v.UpdatedVel)
@@ -126,7 +129,6 @@ func (b *baseObject) GetVel() Point {
 
 // 基本のmodelの更新処理、現状を出力するだけ
 func (b *baseObject) Update() {
-	fmt.Printf("-- Update: id = %d\n", b.ID)
 
 	// 位置に単純に速度ベクトルを加算するだけ
 	b.Pos.Add(&b.Vel)
@@ -136,9 +138,6 @@ func (b *baseObject) Update() {
 	if err == nil {
 		*objDB.UpdatedPos = b.Pos
 		*objDB.UpdatedVel = b.Vel
-		// fmt.Printf("no error GetObjData()\n")
 	}
-
-	fmt.Printf(" in update(): %d, %s, %f, %f\n", b.GetId(), b.GetName(), b.Pos, b.Vel)
 
 }
