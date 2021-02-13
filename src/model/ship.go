@@ -5,9 +5,11 @@ package model
 import (
 	. "core"
 	_ "fmt"
+	"model/ship"
 )
 
 // class名自体は隠ぺいするため、小文字とする
+// ship本体の実装を別ディレクトリに作ろうと思うと、当該パッケージ名は別名にする必要がある（例：shiBody）
 // baseObjectは同じmodelパッケージ内で定義してあるので、そのまま使える
 type ship struct {
 	*baseObject
@@ -38,6 +40,12 @@ func (b *ship) Update() {
 
 	// 位置に単純に速度ベクトルを加算するだけ
 	b.Pos.Add(&b.Vel)
+
+	// 定義は、model/ship以下にあるが、前頭区はパッケージ名を使う
+	shipModel.UpdateVel(&b.Vel)
+
+	// model/shipにて定義した変数をパッケージ名で使える。これでパッケージ内の関数とやり取りが行える。
+	shipModel.VV.Vel = 0
 
 	// ObjDataの更新（他のオブジェクトからの参照用に更新しておく）
 	objDB, err := GetObjData(b.ID)
