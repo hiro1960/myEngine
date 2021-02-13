@@ -41,7 +41,7 @@ func (b *ship) Update() {
 	// 位置に単純に速度ベクトルを加算するだけ
 	b.Pos.Add(&b.Vel)
 
-	// 定義は、model/ship以下にあるが、前頭区はパッケージ名を使う
+	// 定義は、model/ship以下にあるが、前頭句はパッケージ名を使う
 	shipModel.UpdateVel(&b.Vel)
 
 	// model/shipにて定義した変数をパッケージ名で使える。これでパッケージ内の関数とやり取りが行える。
