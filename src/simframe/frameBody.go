@@ -24,7 +24,7 @@ func RunSim() {
 	for count = 0; count < TimeSet.Count; count++ {
 
 		// 各オブジェクトの状態を確認
-		log.WriteS(fmt.Sprintf("time,%d\n", count))
+		log.WriteS(fmt.Sprintf("time,%d,%f\n", count, float64(count)*TimeSet.DeltaTime))
 		for _, v := range ObjList {
 
 			v.Update()
