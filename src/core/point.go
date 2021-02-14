@@ -6,6 +6,9 @@ type Point struct {
 	Value [3]float64
 }
 
+// 地球半径[m]
+var earthRadius float64 = 6371000.0
+
 // Pointのコンストラクタ
 func NewPoint(v [3]float64) *Point {
 	// p := new(Point)
@@ -36,4 +39,14 @@ func (p *Point) Sub(v *Point) {
 	for i, _ := range p.Value {
 		p.Value[i] = p.Value[i] - v.Value[i]
 	}
+}
+
+// Pointとして地球半径を取り出す
+func (p *Point) GetRadius() float64 {
+	return earthRadius
+}
+
+// Pointとして地球半径を変更する
+func (p *Point) SetRadius(r float64) {
+	earthRadius = r
 }

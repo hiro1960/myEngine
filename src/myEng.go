@@ -9,7 +9,7 @@ import (
 	"logwriter"
 	_ "model"
 	"simframe"
-	_ "test" // 試験用パッケージj
+	. "test" // 試験用パッケージj
 )
 
 // modelのクラスはmodelパッケージ内に全て定義してある
@@ -18,9 +18,12 @@ func main() {
 
 	// 試験実施
 	// TestMain()
+	// TestPoint()
+	TestMath()
 
 	env := env.MyEnv.GetInstance()
 	env.SetUp()
+	// この後、Pointが持つ地球半径を初期設定する
 
 	fmt.Printf(" at main, radius = %f \n", env.Radius)
 

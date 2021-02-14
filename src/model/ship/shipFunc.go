@@ -3,7 +3,7 @@
 package shipModel
 
 import (
-	"fmt"
+	_ "fmt"
 	. "core"
 )
 
@@ -15,7 +15,7 @@ type vel struct {
 var VV vel
 
 func UpdateVel(vel *Point) {
-	fmt.Printf("in updateVel(): Vel = %f\n", vel)
+	// fmt.Printf("in updateVel(): Vel = %f\n", vel)
 
 	for i, _ := range vel.Value {
 		vel.Value[i] = vel.Value[i] - 0.1
