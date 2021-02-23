@@ -146,12 +146,12 @@ func (p *Point) Globalize(origin *Point) *Point {
 	sinLon := math.Sin(localLon)
 	cosLat := math.Cos(localLat)
 	cosLon := math.Cos(localLon)
-	
+
 	xdot := -p.Value[1]*sinLon - p.Value[0]*cosLon*sinLat - p.Value[2]*cosLat*cosLon
 	ydot := p.Value[1]*cosLon - p.Value[0]*sinLat*sinLon - p.Value[2]*cosLat*sinLon
 	zdot := p.Value[0]*cosLat - p.Value[2]*sinLat
 
-	pos := NewPoint([3]float64{xdot,ydot,zdot})
+	pos := NewPoint([3]float64{xdot, ydot, zdot})
 	pos.Value[0] += origin.Value[0]
 	pos.Value[1] += origin.Value[1]
 	pos.Value[2] += origin.Value[2]

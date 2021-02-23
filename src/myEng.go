@@ -18,7 +18,6 @@ func main() {
 
 	// 試験実施
 	// TestMain()
-	// TestMath()
 
 	env := env.MyEnv.GetInstance()
 	env.SetUp()
@@ -28,7 +27,8 @@ func main() {
 
 	// pos := core.NewPoint([3]float64{})
 	// pos.SetRadius(env.Radius)
-	TestPoint()
+	// TestPoint()
+	TestCSV()
 
 	// log用ファイルの準備
 	log := logwriter.LogWriter.GetInstance()
