@@ -46,12 +46,12 @@ func NewDcontainer(record [][]string) *Dcontainer {
 // 補間結果を返す
 func (p *Dcontainer)GetValue(v float64) float64 {
 	// 下限のチェック
-	if v < p.index[0] {
+	if v <= p.index[0] {
 		// 補間テーブルの下限を超えている
 		return p.value[0]
 	}
 	// 上限のチェック
-	if v > p.index[len(p.index) - 1] {
+	if v >= p.index[len(p.index) - 1] {
 		// 補間テーブルの上限を超えている
 		return p.value[len(p.index) - 1]
 	}

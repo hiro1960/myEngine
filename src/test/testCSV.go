@@ -47,4 +47,9 @@ func TestCSV() {
 	fmt.Printf("\n")
 	fmt.Printf(" hokan = %f\n", dd.GetValue(2.5))
 
+	// 下限チェック
+	fmt.Printf(" hokan = %f\n", dd.GetValue(0.99))
+	// 上限チェック
+	fmt.Printf(" hokan = %f\n", dd.GetValue(4.001))
+
 }
