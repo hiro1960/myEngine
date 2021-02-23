@@ -18,14 +18,17 @@ func main() {
 
 	// 試験実施
 	// TestMain()
-	// TestPoint()
-	TestMath()
+	// TestMath()
 
 	env := env.MyEnv.GetInstance()
 	env.SetUp()
 	// この後、Pointが持つ地球半径を初期設定する
 
 	fmt.Printf(" at main, radius = %f \n", env.Radius)
+
+	// pos := core.NewPoint([3]float64{})
+	// pos.SetRadius(env.Radius)
+	TestPoint()
 
 	// log用ファイルの準備
 	log := logwriter.LogWriter.GetInstance()
