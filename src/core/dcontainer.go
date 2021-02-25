@@ -21,14 +21,12 @@ func NewDcontainer(record [][]string) *Dcontainer {
 			if i ==0 {
 				// index
 				d, _ := strconv.ParseFloat(s, 64)
-				newIndex := append(p.index, d)
-				p.index = newIndex
+				p.index = append(p.index, d)
 			}
 			if i == 1 {
 				// value
 				d, _ := strconv.ParseFloat(s, 64)
-				newValue := append(p.value, d)
-				p.value = newValue
+				p.value = append(p.value, d)
 			}
 		}
 	}
