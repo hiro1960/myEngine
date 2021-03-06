@@ -10,6 +10,9 @@ var DegToRad float64 = math.Pi / 180.0
 
 // 線形補間関数
 func Hokan(x, x1, x2, v1, v2 float64) float64 {
+    //                     (v2-v1)
+    //  returnValue = v1 + ------- * (x-x1)
+    //                     (x2-x1)
 	var r float64
 	if math.Abs(x2-x1) > 0.0 {
 		r = v1 + ((v2 - v1) * (x - x1) / (x2 - x1))

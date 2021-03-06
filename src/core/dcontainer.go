@@ -16,9 +16,9 @@ type Dcontainer struct {
 // Dcontiner型　コンストラクタ　（[][]stringを設定値としてもらう）
 func NewDcontainer(record [][]string) *Dcontainer {
 	p := new(Dcontainer)
-	for _,v := range record {
+	for _, v := range record {
 		for i, s := range v {
-			if i ==0 {
+			if i == 0 {
 				// index
 				d, _ := strconv.ParseFloat(s, 64)
 				p.index = append(p.index, d)
@@ -42,16 +42,16 @@ func NewDcontainer(record [][]string) *Dcontainer {
 }
 
 // 補間結果を返す
-func (p *Dcontainer)GetValue(v float64) float64 {
+func (p *Dcontainer) GetValue(v float64) float64 {
 	// 下限のチェック
 	if v <= p.index[0] {
 		// 補間テーブルの下限を超えている
 		return p.value[0]
 	}
 	// 上限のチェック
-	if v >= p.index[len(p.index) - 1] {
+	if v >= p.index[len(p.index)-1] {
 		// 補間テーブルの上限を超えている
-		return p.value[len(p.index) - 1]
+		return p.value[len(p.index)-1]
 	}
 
 	// indexのサーチ
@@ -59,12 +59,12 @@ func (p *Dcontainer)GetValue(v float64) float64 {
 	for i, _ := range p.index {
 		if v < p.index[i] {
 			// 補間対象が見つかった
-			l = i	// 変数iは、for-loop内しか使えないので別の変数に代入する
-			break;
+			l = i // 変数iは、for-loop内しか使えないので別の変数に代入する
+			break
 		}
 	}
 
-	r := Hokan(v, p.index[l - 1], p.index[l], p.value[l - 1], p.value[l])
+	r := Hokan(v, p.index[l-1], p.index[l], p.value[l-1], p.value[l])
 
 	return r
 }
