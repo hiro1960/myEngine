@@ -8,11 +8,11 @@ import (
 
 // Tcontainer型
 type Tcontainer struct {
-	index1 []float64
-	index2 []float64
-	numOfTag1 int32
-	numOfTag2 int32
-	value  []float64
+	index1    []float64
+	index2    []float64
+	numOfTag1 int
+	numOfTag2 int
+	value     []float64
 }
 
 // Tcontainer型　コンストラクタ　（[][]stringを設定値としてもらう）
@@ -86,8 +86,8 @@ func NewTcontainer(record [][]string) *Tcontainer {
 
 // 補間結果を返す
 func (p *Tcontainer) GetValue(v1, v2 float64) float64 {
-	var idx1 float64	// index1の入力
-	var idx2 float64	// index2の入力
+	var idx1 float64 // index1の入力
+	var idx2 float64 // index2の入力
 
 	// 初期値設定
 	idx1 = v1
@@ -113,7 +113,73 @@ func (p *Tcontainer) GetValue(v1, v2 float64) float64 {
 	}
 
 	// 変数を使用したことにする
+	fmt.Printf("in Tcontainr GetValue()\n")
 	fmt.Printf("%f %f\n", idx1, idx2)
 
-	return 0.0
+	var idx1L float64 // index1 下の値
+	var idx1Lcnt int  // idx1Lの位置
+	// 初期値
+	idx1L = p.index1[0]
+	idx1Lcnt = 0
+	for i := 0; i < len(p.index1); i += p.numOfTag1 {
+		if idx1 < p.index1[i] {
+			break
+		}
+		idx1L = p.index1[i]
+		idx1Lcnt = i
+	}
+
+	// fmt.Printf("idx1L = %f, idx1Lcnt =%d\n", idx1L, idx1Lcnt)	// デバッグ用出力
+
+	var idx1U float64 // index1 上の値
+	var idx1Ucnt int  // idx1Uの位置
+	// 初期値
+	idx1U = p.index1[len(p.index1)-1]
+	idx1Ucnt = len(p.index1) - p.numOfTag1
+	for i := (len(p.index1) - p.numOfTag1); i >= 0; i -= p.numOfTag1 {
+		if idx1 >= p.index1[i] {
+			break
+		}
+		idx1U = p.index1[i]
+		idx1Ucnt = i
+	}
+	// fmt.Printf("idx1U = %f, idx1Ucnt =%d\n", idx1U, idx1Ucnt)	// デバッグ用出力
+
+	var idx2L float64 // index2 下の値
+	var idx2Lcnt int  // idx2Lの位置（相対位置であることに注意）
+	// 初期値
+	idx2L = p.index2[idx1Lcnt]
+	idx2Lcnt = 0
+	for i := idx1Lcnt; i < (idx1Lcnt + p.numOfTag2); i++ {
+		if idx2 < p.index2[i] {
+			break
+		}
+		idx2L = p.index2[i]
+		idx2Lcnt = i - idx1Lcnt
+	}
+	// fmt.Printf("idx2L = %f, idx2Lcnt =%d\n", idx2L, idx2Lcnt)	// デバッグ用出力
+
+	var idx2U float64 // index2 上の値
+	var idx2Ucnt int  // idx2Uの位置（相対位置であることに注意）
+	// 初期値
+	idx2U = p.index2[idx1Lcnt+p.numOfTag2-1]
+	idx2Ucnt = p.numOfTag2 - 1
+	for i := (idx1Lcnt + p.numOfTag2 - 1); i >= idx1Lcnt; i-- {
+		if idx2 >= p.index2[i] {
+			break
+		}
+		idx2U = p.index2[i]
+		idx2Ucnt = i - idx1Lcnt
+	}
+	// fmt.Printf("idx2U = %f, idx2Ucnt =%d\n", idx2U, idx2Ucnt)	// デバッグ用出力
+
+	tempL := Hokan(idx2, idx2L, idx2U,
+		p.value[idx1Lcnt+idx2Lcnt], p.value[idx1Lcnt+idx2Ucnt])
+
+	tempU := Hokan(idx2, idx2L, idx2U,
+		p.value[idx1Ucnt+idx2Lcnt], p.value[idx1Ucnt+idx2Ucnt])
+
+	r := Hokan(idx1, idx1L, idx1U, tempL, tempU)
+
+	return r
 }

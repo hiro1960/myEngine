@@ -83,7 +83,8 @@ func TestCSV2() {
 	// Tcontainerへ格納
 	dd := core.NewTcontainer(record)
 
-	fmt.Printf("%v\n", dd)
+	v := dd.GetValue(40, 15)
+	fmt.Printf(" hokan kekka = %f\n", v)
 
 	fmt.Printf("\n")
 
