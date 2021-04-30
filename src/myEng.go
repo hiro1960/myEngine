@@ -29,7 +29,8 @@ func main() {
 	// pos.SetRadius(env.Radius)
 	// TestPoint()
 	// TestCSV()
-	TestCSV2()
+	// TestCSV2()
+	TestMat()
 
 	// log用ファイルの準備
 	log := logwriter.LogWriter.GetInstance()
