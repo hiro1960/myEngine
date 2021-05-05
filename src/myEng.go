@@ -3,13 +3,13 @@ package main
 
 // GOPATH環境変数の設定は必要（パッケージを読めなくなる）
 import (
-	_ "core"
+	. "core"
 	"env"
 	"fmt"
 	"logwriter"
 	_ "model"
 	"simframe"
-	. "test" // 試験用パッケージj
+	_ "test" // 試験用パッケージj
 )
 
 // modelのクラスはmodelパッケージ内に全て定義してある
@@ -30,7 +30,9 @@ func main() {
 	// TestPoint()
 	// TestCSV()
 	// TestCSV2()
-	TestMat()
+	// TestMat()
+	p := new(Quartenion)
+	p.Initialize(0.0, 0.0, 0.0)
 
 	// log用ファイルの準備
 	log := logwriter.LogWriter.GetInstance()
