@@ -135,8 +135,8 @@ func (p *Tcontainer) GetValue(v1, v2 float64) float64 {
 	var idx1Ucnt int  // idx1Uの位置
 	// 初期値
 	idx1U = p.index1[len(p.index1)-1]
-	idx1Ucnt = len(p.index1) - p.numOfTag1
-	for i := (len(p.index1) - p.numOfTag1); i >= 0; i -= p.numOfTag1 {
+	idx1Ucnt = len(p.index1) - p.numOfTag2
+	for i := (len(p.index1) - p.numOfTag2); i >= 0; i -= p.numOfTag2 {
 		if idx1 >= p.index1[i] {
 			break
 		}
