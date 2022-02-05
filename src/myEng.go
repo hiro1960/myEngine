@@ -3,7 +3,7 @@ package main
 
 // GOPATH環境変数の設定は必要（パッケージを読めなくなる）
 import (
-	. "core"
+	"core"
 	"env"
 	"fmt"
 	"logwriter"
@@ -31,8 +31,17 @@ func main() {
 	// TestCSV()
 	// TestCSV2()
 	// TestMat()
-	p := new(Quartenion)
-	p.Initialize(0.0, 0.0, 0.0)
+
+	// Quartenionのテスト
+	fmt.Printf("*** test Quartenion *** \n")
+	p := new(core.Quartenion)
+	p.Initialize(0.1, 0.1, 0.1)
+	srcPt := core.NewPoint([3]float64{1.0, 0.0, 0.0})
+	dstPt := core.NewPoint([3]float64{})
+	p.EulerTrans(srcPt, dstPt)
+	fmt.Printf(" srcPt : %f\n", srcPt)
+	fmt.Printf(" dstPt : %f\n", dstPt)
+
 
 	// log用ファイルの準備
 	log := logwriter.LogWriter.GetInstance()

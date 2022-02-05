@@ -82,6 +82,7 @@ func (p *Quartenion) GetN3() float64 {
 }
 
 // 初期化
+// phi, theta, psi [rad]
 func (p *Quartenion) Initialize(phi, theta, psi float64) {
 	cosPsi2 := math.Cos(psi / 2.0)
 	sinPsi2 := math.Sin(psi / 2.0)
@@ -113,12 +114,12 @@ func (p *Quartenion) UpdateEulerMatrix() {
 	e0e1 := p.e0 * p.e1
 	e0e2 := p.e0 * p.e2
 	e0e3 := p.e0 * p.e3
-	e1e2 := p.e1 * p.e3
+	e1e2 := p.e1 * p.e2
 	e1e3 := p.e1 * p.e3
 	e2e3 := p.e2 * p.e3
 
 	p.l1 = e0e0 + e1e1 - e2e2 - e3e3
-	p.l2 = 2.0 * (e1e2 - e2e3)
+	p.l2 = 2.0 * (e1e2 - e0e3)
 	p.l3 = 2.0 * (e0e2 + e1e3)
 	p.m1 = 2.0 * (e0e3 + e1e2)
 	p.m2 = e0e0 - e1e1 + e2e2 - e3e3
@@ -129,6 +130,7 @@ func (p *Quartenion) UpdateEulerMatrix() {
 }
 
 // quartenionの更新
+// p, q, r [rad/s]
 func (v *Quartenion) UpdateQuartenion(p, q, r, dtime float64) {
 	var Kq float64
 	Kq = 0.0
