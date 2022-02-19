@@ -36,11 +36,19 @@ func main() {
 	fmt.Printf("*** test Quartenion *** \n")
 	p := new(core.Quartenion)
 	p.Initialize(0.1, 0.1, 0.1)
+	// p.Initialize(0.1, -0.1, 0.2)
+	fmt.Printf(" q : %f\n", p)
 	srcPt := core.NewPoint([3]float64{1.0, 0.0, 0.0})
 	dstPt := core.NewPoint([3]float64{})
+
+	p.UpdateQuartenion(0.01, 0.01, 0.01, 0.1)
+	fmt.Printf(" q : %f\n", p)
 	p.EulerTrans(srcPt, dstPt)
 	fmt.Printf(" srcPt : %f\n", srcPt)
 	fmt.Printf(" dstPt : %f\n", dstPt)
+
+	p.EulerTransInverse(srcPt, dstPt)
+	fmt.Printf(" Inv dstPt : %f\n", dstPt)
 
 
 	// log用ファイルの準備
